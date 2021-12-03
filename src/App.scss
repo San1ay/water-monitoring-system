@@ -1,0 +1,21 @@
+$primary: #b62f2f;
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+$theme-colors: (
+  "green": #5dd65d,
+  "googlecolor": rgb(192, 58, 34),
+);
+
+$theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
+$utilities-colors: map-merge($theme-colors, $utilities-colors);
+$utilities-text-colors: map-loop(
+  $utilities-colors,
+  rgba-css-var,
+  "$key",
+  "text"
+);
+$utilities-bg-colors: map-loop($utilities-colors, rgba-css-var, "$key", "bg");
+
+@import "~bootstrap/scss/bootstrap";
