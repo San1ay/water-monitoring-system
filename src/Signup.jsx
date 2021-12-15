@@ -1,9 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "./userContext";
 import Button from "react-bootstrap/Button";
 
 export default function SignUp() {
   const {
+    backURL,
+    axios,
     user,
     email,
     setEmail,
@@ -13,31 +15,51 @@ export default function SignUp() {
     signInWithGoogle,
   } = useContext(UserContext);
 
+  const [userData, setUserData] = useState({});
   const signup = (e) => {
     firebaseAppAuth
       .createUserWithEmailAndPassword(email, pass)
       .then((user) => {
-        // setIsLoggedIn(true);
+        axios.post(backURL + "/user/register", {
+          userID: user.user.uid,
+          email,
+          userData,
+        });
       })
-      .catch((er) => alert(er));
+      .catch((er) => console.log(er));
   };
 
-  if (user) window.location.href = "/";
+  if (user) window.location.href = "/tests";
   else
     return (
       <form>
         <h3>Join us</h3>
-        <div className="form-group">
-          <label>First name</label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="First name"
-          />
-        </div>
-        <div className="form-group">
-          <label>Last name</label>
-          <input type="text" className="form-control" placeholder="Last name" />
+        <div className="name-group">
+          <div className="form-group">
+            <label>First name</label>
+            <input
+              type="text"
+              value={userData?.fname}
+              onChange={(e) => {
+                setUserData((prevState) => ({
+                  ...prevState,
+                  fname: e.target.value,
+                }));
+              }}
+              className="form-control"
+              placeholder="First name"
+            />
+          </div>
+          <div className="form-group">
+            <label>Last name</label>
+            <input
+              type="text"
+              value={userData.lname}
+              onChange={(e) => setUserData({ ...userData, lname: e.target.value })}
+              className="form-control"
+              placeholder="Last name"
+            />
+          </div>
         </div>
         <div className="form-group">
           <label>Email</label>
@@ -59,15 +81,33 @@ export default function SignUp() {
             placeholder="Enter password"
           />
         </div>
-        <Button
-          variant="success"
-          style={{ backgroundColor: "green", marginTop: "20px" }}
-          onClick={signup}
-        >
+        <div className="loc-group">
+          <div>
+            <label>Location</label>
+            <input
+              type="text"
+              value={userData.loc}
+              onChange={(e) => setUserData({ ...userData, loc: e.target.value })}
+              className="form-control"
+              placeholder="Enter your Address"
+            />
+          </div>
+          <div className="form-group">
+            <label>Age</label>
+            <input
+              type="text"
+              value={userData.age}
+              onChange={(e) => setUserData({ ...userData, age: e.target.value })}
+              className="form-control"
+              placeholder="Your Age"
+            />
+          </div>
+        </div>
+        <Button variant="signupButtonColor" style={{ marginTop: "20px" }} onClick={signup}>
           Signup
         </Button>
         <Button
-          variant="googlecolor"
+          variant="googleColor"
           style={{ marginLeft: "30px", marginTop: "20px" }}
           onClick={signInWithGoogle}
         >

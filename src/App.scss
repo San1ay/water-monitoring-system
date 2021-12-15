@@ -1,11 +1,12 @@
-$primary: #b62f2f;
-
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 
 $theme-colors: (
-  "green": #5dd65d,
-  "googlecolor": rgb(192, 58, 34),
+  "googleColor": rgb(189, 53, 12),
+  "loginButtonColor": rgb(9, 105, 9),
+  "signupButtonColor": rgb(6, 83, 6),
+  "newTestColor": rgb(21, 110, 226),
+  "backButtonColor": rgb(194, 38, 46),
 );
 
 $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");

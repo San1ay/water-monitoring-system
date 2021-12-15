@@ -20,7 +20,7 @@ export default function Login() {
       .catch((er) => alert(er));
   };
 
-  if (user) window.location.href = "/";
+  if (user) window.location.href = "/tests";
   else
     return (
       <form>
@@ -48,17 +48,16 @@ export default function Login() {
         </div>
         <div className="">
           <Button
-            variant="success"
-            style={{ backgroundColor: "green", marginTop: "20px" }}
+            variant="loginButtonColor"
+            style={{ marginTop: "20px" }}
             onClick={() => {
               signin();
-              // setIsLoggedIn(true);
             }}
           >
             Login
-          </Button>{" "}
+          </Button>
           <Button
-            variant="googlecolor"
+            variant="googleColor"
             style={{ marginTop: "20px", marginLeft: "30px" }}
             onClick={signInWithGoogle}
           >

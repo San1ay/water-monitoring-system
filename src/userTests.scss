@@ -1,0 +1,50 @@
+.userTests {
+  text-align: center;
+
+  // &__data,
+  // &__header {
+  //   display: grid;
+  //   grid-template-columns: repeat(4, 1fr);
+  // }
+
+  // &__header {
+  //   font-weight: bold;
+  // }
+
+  &__data {
+    &.good {
+      background-color: rgb(13, 143, 13);
+    }
+    &.fair {
+      background-color: rgb(130, 202, 130);
+    }
+    &.poor {
+      background-color: rgb(177, 52, 52);
+    }
+  }
+
+  &__wqi,
+  &__rating,
+  &__confidence,
+  &__season,
+  &__index {
+    border: 1px solid black;
+    margin: 1px 0.5px;
+    border-width: 1px !important;
+  }
+}
+
+// Test
+.water-quility {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+input.temp {
+  width: 79%;
+  display: inline;
+}
+.form-group select {
+  display: inline;
+  width: 20%;
+}
